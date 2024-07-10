@@ -11,10 +11,10 @@ const Chip = ({ label, icon, bgColor }: Props) => {
     <div
       className={`flex gap-2 items-center ${
         bgColor ? `${bgColor}` : "bg-primary-800"
-      } p-3 rounded-lg`}
+      } p-2 rounded-lg`}
     >
       {icon ? icon : null}
-      <p className="capitalize">{label}</p>
+      <small className="capitalize">{label}</small>
     </div>
   );
 };
