@@ -27,13 +27,6 @@ export default function Home() {
   useEffect(() => {
     let watchId: number | null = null;
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-        setLocationStatus("accessed");
-      });
       watchId = navigator.geolocation.watchPosition(
         (position) => {
           setPosition({
@@ -57,6 +50,9 @@ export default function Home() {
               setLocationStatus("error");
               break;
           }
+        },
+        {
+          enableHighAccuracy: true,
         }
       );
       return () => {
