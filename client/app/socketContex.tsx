@@ -1,10 +1,19 @@
 "use client";
-import { useState, createContext, useContext, ReactNode } from "react";
+import {
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import { io, Socket } from "socket.io-client";
+import { ServerStatus } from "./global";
+import { toast } from "react-toastify";
 
 type SocketContextType = {
   socket: Socket | null;
   connectSocket: () => void;
+  serverStatus: ServerStatus;
 };
 
 type SocketProviderProps = {
@@ -18,6 +27,9 @@ export const SocketContext = createContext<SocketContextType | null>(null);
 export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
+  const [serverStatus, setServerStatus] =
+    useState<ServerStatus>("disconnected");
+
   const connectSocket = () => {
     if (!socket) {
       if (!SOCKET_URL) return;
@@ -28,8 +40,27 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
     socket.connect();
   };
 
+  const getServerStatus = async () => {
+    if (!SOCKET_URL) return;
+    try {
+      setServerStatus("connecting");
+      const res = await fetch(SOCKET_URL);
+      if (res.ok) {
+        setServerStatus("connected");
+      }
+    } catch (error) {
+      // console.log(error)
+      toast("Connection to the server failed");
+    }
+  };
+
+  useEffect(() => {
+    if (serverStatus === "connected") return;
+    getServerStatus();
+  }, []);
+
   return (
-    <SocketContext.Provider value={{ socket, connectSocket }}>
+    <SocketContext.Provider value={{ socket, connectSocket, serverStatus }}>
       {children}
     </SocketContext.Provider>
   );

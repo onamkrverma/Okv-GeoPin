@@ -52,21 +52,23 @@ const SharedLocation = () => {
       );
 
       socket.on("roomDestoryed", () => {
-        console.log("room not exist");
+        toast.info("Not found any live locaion on this link");
+        setStatusMessage("Not found any live locaion on this link");
         socket.disconnect();
       });
       socket.on("disconnect", () => {
-        console.log("disconnected");
+        toast.info("disconnected");
       });
-    } else {
-      setStatusMessage("Please wait server is not connected");
     }
   }, [socket]);
 
   return (
     <div className="flex flex-col gap-2 my-10">
       {position ? (
-        <Map latitude={position.lat} longitude={position.lng} />
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl">User's live location</h2>
+          <Map latitude={position.lat} longitude={position.lng} />
+        </div>
       ) : null}
 
       <div className="flex flex-col gap-2 items-center">
@@ -78,7 +80,7 @@ const SharedLocation = () => {
         <Link
           href={"/"}
           title="Home"
-          className=" bg-primary-800 p-2 px-4 rounded-lg hover:bg-primary-700"
+          className="bg-primary-800 p-2 px-4 rounded-lg hover:bg-primary-700"
         >
           Home
         </Link>

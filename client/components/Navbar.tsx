@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import MapIcon from "@/public/icons/map.svg";
 
 const Navbar = () => {
   return (
@@ -12,7 +13,10 @@ const Navbar = () => {
             title="okv location"
             className="text-xl text-white font-bold"
           >
-            Okv location
+            <p className="flex gap-1 items-center">
+              <MapIcon className="w-6 h-6" />
+              Okv location
+            </p>
           </Link>
         </div>
       </nav>

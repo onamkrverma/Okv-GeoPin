@@ -8,3 +8,5 @@ export type GeolocationPosition = {
   lng: number;
 };
 export type LocationStatus = "accessed" | "denied" | "unknown" | "error";
+
+export type ServerStatus = "connected" | "disconnected" | "connecting";

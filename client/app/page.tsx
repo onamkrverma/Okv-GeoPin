@@ -14,7 +14,7 @@ type RoomInfo = {
 };
 
 export default function Home() {
-  const { socket, connectSocket } = useSocket();
+  const { socket, connectSocket, serverStatus } = useSocket();
   const [locationStatus, setLocationStatus] =
     useState<LocationStatus>("unknown");
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
@@ -53,6 +53,8 @@ export default function Home() {
         },
         {
           enableHighAccuracy: true,
+          maximumAge: 10 * 1000,
+          timeout: 10 * 1000,
         }
       );
       return () => {
@@ -179,7 +181,7 @@ export default function Home() {
       <LocationStatusbar
         locationStatus={locationStatus}
         position={position}
-        socketStatus={socketStatus}
+        serverStatus={serverStatus}
       />
 
       {position ? (

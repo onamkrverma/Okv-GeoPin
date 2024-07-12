@@ -4,22 +4,23 @@ import MapIcon from "@/public/icons/map.svg";
 import MapOffIcon from "@/public/icons/map-off.svg";
 import ServerIcon from "@/public/icons/server.svg";
 import ServerOffIcon from "@/public/icons/server-off.svg";
+import LoadingIcon from "@/public/icons/loading.svg";
 import {
   GeolocationPosition,
   LocationStatus,
-  SocketStatus,
+  ServerStatus,
 } from "@/app/global";
 
 type Props = {
   locationStatus: LocationStatus;
   position: GeolocationPosition | null;
-  socketStatus: SocketStatus;
+  serverStatus: ServerStatus;
 };
 
 const LocationStatusbar = ({
   locationStatus,
   position,
-  socketStatus,
+  serverStatus,
 }: Props) => {
   return (
     <div className="flex gap-4 items-center justify-between flex-wrap">
@@ -38,11 +39,17 @@ const LocationStatusbar = ({
           />
         )}
 
-        {socketStatus === "connected" ? (
+        {serverStatus === "connected" ? (
           <Chip
             label="Server connected"
             bgColor="bg-green-600"
             icon={<ServerIcon className="w-4 h-4" />}
+          />
+        ) : serverStatus === "connecting" ? (
+          <Chip
+            label="Server connecting.."
+            bgColor="bg-yellow-600"
+            icon={<LoadingIcon className="w-4 h-4" />}
           />
         ) : (
           <Chip
