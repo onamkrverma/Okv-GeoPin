@@ -12,7 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to Express & TypeScript Server");
+  res
+    .status(200)
+    .json({ status: "success", message: "Okv GeoPin server is running..." });
 });
 
 const server = app.listen(port, () => {

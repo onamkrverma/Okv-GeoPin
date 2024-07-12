@@ -21,10 +21,5 @@ lib-cov
 # Dependencies (node_modules)
 node_modules/
 
-# build folder
-dist
-build
-
-
 # env 
 .env
