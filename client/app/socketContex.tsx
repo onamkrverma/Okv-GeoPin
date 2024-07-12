@@ -41,7 +41,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   };
 
   const getServerStatus = async () => {
-    if (!SOCKET_URL) return;
+    if (!SOCKET_URL || serverStatus === "connected") return;
     try {
       setServerStatus("connecting");
       const res = await fetch(SOCKET_URL);
@@ -55,7 +55,6 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   };
 
   useEffect(() => {
-    if (serverStatus === "connected") return;
     getServerStatus();
   }, []);
 

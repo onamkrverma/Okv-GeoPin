@@ -60,13 +60,13 @@ const SharedLocation = () => {
         toast.info("disconnected");
       });
     }
-  }, [socket]);
+  }, [socket, roomId]);
 
   return (
     <div className="flex flex-col gap-2 my-10">
       {position ? (
         <div className="flex flex-col gap-2">
-          <h2 className="text-xl">User's live location</h2>
+          <h2 className="text-xl">User live location</h2>
           <Map latitude={position.lat} longitude={position.lng} />
         </div>
       ) : null}
