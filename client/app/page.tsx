@@ -244,7 +244,7 @@ export default function Home() {
         <button
           type="button"
           title="Share your location"
-          className="w-44 bg-primary-800 p-2 rounded-lg hover:bg-primary-700"
+          className="w-44 bg-primary-700 p-2 rounded-lg hover:bg-primary-800"
           onClick={shareLocationLink}
         >
           Share Location

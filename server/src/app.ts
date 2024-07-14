@@ -83,8 +83,8 @@ io.on("connection", (socket: CustomSocket) => {
     io.emit("updateLocationResponse", data);
   });
 
-  socket.on("diconnect", () => {
-    console.log("user diconnected", socket.id);
+  socket.on("disconnect", () => {
+    console.log("user disconnect", socket.id);
 
     const roomId = socket.roomId;
 
@@ -114,7 +114,7 @@ io.on("connection", (socket: CustomSocket) => {
 
             createSocket.emit("userLeftRoom", {
               userId: socket.id,
-              totalConnectedUser: Array.from(totalRoomUsers || []),
+              totalConnectedUsers: Array.from(totalRoomUsers || []),
             });
           }
         }

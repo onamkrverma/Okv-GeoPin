@@ -58,10 +58,13 @@ const SharedLocation = () => {
       );
 
       socket.on("roomDestroyed", () => {
+        // console.log("roomDestroyed");
+        setStatusMessage("User disabled location sharing");
         setRoomStatus("not-exist");
         socket.disconnect();
       });
       socket.on("disconnect", () => {
+        // console.log("disconnected");
         toast.info("disconnected");
       });
     }
