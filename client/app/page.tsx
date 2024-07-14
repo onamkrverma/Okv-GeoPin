@@ -5,7 +5,7 @@ import LocationStatusbar from "@/components/LocationStatusbar";
 import { GeolocationPosition, LocationStatus, SocketStatus } from "./global";
 import Map from "@/components/Map";
 import ClipboardIcon from "@/public/icons/clipboard.svg";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 type RoomInfo = {
   roomId: string;
@@ -47,6 +47,7 @@ export default function Home() {
               setLocationStatus("unknown");
               break;
             default:
+              console.log(error);
               setLocationStatus("error");
               break;
           }
@@ -178,6 +179,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-2 my-6">
+      <ToastContainer />
+
       <LocationStatusbar
         locationStatus={locationStatus}
         position={position}

@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import { GeolocationPosition } from "../../global";
 import { useParams } from "next/navigation";
 import { useSocket } from "@/app/socketContex";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
+
+type RoomStatus = "unknown" | "joined" | "not-exist";
 
 const SharedLocation = () => {
   const params = useParams<{ roomId: string }>();
@@ -13,6 +15,7 @@ const SharedLocation = () => {
   const { socket, connectSocket } = useSocket();
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
+  const [roomStatus, setRoomStatus] = useState<RoomStatus>("unknown");
 
   useEffect(() => {
     connectSocket();
@@ -33,11 +36,14 @@ const SharedLocation = () => {
 
       socket.on("roomJoined", ({ status }: { status: string }) => {
         if (status === "OK") {
+          setRoomStatus("joined");
           toast.success("your can see live location of user");
         } else if (status === "ERROR") {
+          setRoomStatus("not-exist");
           toast.error("Not found any live locaion on this link");
           setStatusMessage("Not found any live locaion on this link");
         } else {
+          setRoomStatus("unknown");
           console.log("unknown error");
         }
       });
@@ -51,20 +57,21 @@ const SharedLocation = () => {
         }
       );
 
-      socket.on("roomDestoryed", () => {
-        toast.info("Not found any live locaion on this link");
-        setStatusMessage("Not found any live locaion on this link");
+      socket.on("roomDestroyed", () => {
+        setRoomStatus("not-exist");
         socket.disconnect();
       });
       socket.on("disconnect", () => {
         toast.info("disconnected");
       });
     }
-  }, [socket, roomId]);
+  }, [socket]);
 
   return (
     <div className="flex flex-col gap-2 my-10">
-      {position ? (
+      <ToastContainer />
+
+      {roomStatus === "joined" && position ? (
         <div className="flex flex-col gap-2">
           <h2 className="text-xl">User live location</h2>
           <Map latitude={position.lat} longitude={position.lng} />
