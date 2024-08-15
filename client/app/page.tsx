@@ -61,8 +61,8 @@ export default function Home() {
         },
         {
           enableHighAccuracy: false,
-          maximumAge: 5 * 1000,
-          timeout: 5 * 1000,
+          maximumAge: 10 * 1000,
+          timeout: 10 * 1000,
         }
       );
       return () => {
