@@ -14,6 +14,10 @@ type RoomInfo = {
 };
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Home | Okv GeoPin";
+  }, []);
+
   const { socket, connectSocket, serverStatus } = useSocket();
   const [locationStatus, setLocationStatus] =
     useState<LocationStatus>("unknown");
@@ -29,16 +33,16 @@ export default function Home() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lat: parseFloat(position.coords.latitude.toFixed(4)),
+          lng: parseFloat(position.coords.longitude.toFixed(4)),
         });
         setLocationStatus("accessed");
       });
       watchId = navigator.geolocation.watchPosition(
         (position) => {
           setPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            lat: parseFloat(position.coords.latitude.toFixed(4)),
+            lng: parseFloat(position.coords.longitude.toFixed(4)),
           });
           setLocationStatus("accessed");
         },

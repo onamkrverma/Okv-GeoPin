@@ -10,6 +10,10 @@ import Link from "next/link";
 type RoomStatus = "unknown" | "joined" | "not-exist";
 
 const SharedLocation = () => {
+  useEffect(() => {
+    document.title = "Shared Location | Okv GeoPin";
+  }, []);
+
   const params = useParams<{ roomId: string }>();
   const roomId = params.roomId;
   const { socket, connectSocket } = useSocket();

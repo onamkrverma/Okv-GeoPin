@@ -15,7 +15,7 @@ const Map = ({
       </span>
       <iframe
         title="google map"
-        src={`https://maps.google.com/maps?q=@${latitude},${longitude}&z=25&output=embed`}
+        src={`https://maps.google.com/maps?q=@${latitude},${longitude}&z=20&output=embed`}
         width="100%"
         height="300"
         loading="lazy"
