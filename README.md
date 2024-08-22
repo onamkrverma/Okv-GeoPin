@@ -1,6 +1,6 @@
 # Okv-GeoPin
 
-Okv-GeoPin is a geolocation-based application that allows users to pin locations on a map and share their location with other. This monorepo contains both the client and server code for the application.
+Okv-GeoPin is a geolocation-based application that allows users to pin locations on a map and share their location with other in real-time. This monorepo contains both the client and server code for the application.
 
 ![image](https://github.com/user-attachments/assets/e857811a-7de8-4a3e-b421-bcb50cb740d3)
 
@@ -14,8 +14,8 @@ Okv-GeoPin is a geolocation-based application that allows users to pin locations
 
 ## Tech Stack
 
-- **Client**: TypeScript, JavaScript, CSS, Socket.io client
-- **Server**: Node.js, Express, Socket.io
+- **Client**: Nextjs, TypeScript, Tailwind CSS, Socket.io client
+- **Server**: Node.js, Express.js, Socket.io
 - **Deployment**: Vercel
 
 ## Getting Started
