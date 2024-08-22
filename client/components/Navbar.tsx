@@ -10,12 +10,12 @@ const Navbar = () => {
           {/* logo */}
           <Link
             href="/"
-            title="okv location"
+            title="Okv GeoPin"
             className="text-xl text-white font-bold"
           >
             <p className="flex gap-1 items-center">
               <MapIcon className="w-6 h-6" />
-              Okv location
+              Okv GeoPin
             </p>
           </Link>
         </div>
